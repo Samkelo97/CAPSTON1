@@ -39,7 +39,7 @@ const {
     });
   };
   // Update Product
-  const updateProduct = (req, res) => {
+  const updateProduct = ( res) => {
     const data = req.body;
     const id = req.params.id;
     updateProductById(data, id, (err, results) => {
