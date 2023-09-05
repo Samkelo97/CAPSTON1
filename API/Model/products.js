@@ -4,7 +4,7 @@ const {
     insertProduct,
     updateProductById,
     deleteProductById,
-  } = require("../model/productModel");
+  } = require("../Model/products");
   // Import function from Product Model
   //import { getProducts, getProductById, insertProduct, updateProductById, deleteProductById } from "../models/productModel.js";
   // Get All Products
