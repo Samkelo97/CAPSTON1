@@ -20,5 +20,8 @@
     "jsonwebtoken": "^9.0.2",
     "msql": "^1.0.3",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
