@@ -1,6 +1,6 @@
 const Users = require('./users')
-const Products = require('./products')
+const products = require('./products')
 module.exports = {
     users: new Users(),
-    products: new Products()
+    products: new products()
 }
