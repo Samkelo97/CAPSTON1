@@ -5,7 +5,8 @@ const routes = express.Router()
 //Import all model's objects
 const {users, products} = require('../Model')
 //User's router
-routes.get('/users', (req, res)=>{
+routes.get('/users',
+ (req, res)=>{
     users.fetchUsers(req, res)
 })
 routes.get('/users/:id', (req, res)=>{
