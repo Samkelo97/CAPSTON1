@@ -1,7 +1,5 @@
-const express = require("express");
-// const path = require('path');
-const bodyParser = require("body-parser");
-const {router, verifyAToken} = require("./routes/routes")
+const {express, routes} = require('./controller')
+const path = require('path')
 const app = express()
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -26,7 +24,6 @@ app.use((req, res, next) => {
     }),
     cookieParser(),
     cors(),
-    routes
 )
   // Handling all errors
   app.use(ErrorHandling);
