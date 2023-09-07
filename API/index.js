@@ -1,6 +1,6 @@
 const {express, routes} = require('./controller')
 const path = require('path')
-const app = express()
+const app = express();
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const ErrorHandling = require('./Middleware/errorHandling')
