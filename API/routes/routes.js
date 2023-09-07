@@ -1,10 +1,10 @@
 const express = require("express");
 const bodyParser = require('body-parser')
-const {verifyAToken} = require('../middleware/authentication')
+const {verifyAToken} = require('../Middleware/authentication')
 const router = express.Router()
-const productController = require("../controllers/product");
-const cartController = require("../controllers/cartController.js");
-const ordersController = require("../controllers/ordersController.js");
+const productController = require("../controller/product");
+const cartController = require("../controller/cartController.js");
+const ordersController = require("../controller/ordersController.js");
 const Users = require('../Model/users.js');
 const users = new Users();
 // Middleware
