@@ -1,80 +1,83 @@
 const db = require("../config/index");
-class Products {
-    constructor() {
+const getProducts = (searchKeyword, result) => {
+    let query = "SELECT * FROM products";
+    const values = [];
+    if (searchKeyword) {
+        query += " WHERE (product_name LIKE ? OR description LIKE ?)";
+        values.push(`%${searchKeyword}%`, `%${searchKeyword}%`);
     }
-    getProducts(req, res) {
-        const query = `
-        SELECT prodID, prodName, quantity,
-        amount, Category, prodUrl
-        FROM Products;
-        `
-        db.query(query, (err, results) => {
-            if(err) {
-                throw err
-            } else {
-                res.json({  status: res.statusCode, results  });
-            }
-        })
-    }
-    // Get a single product
-    getProduct(req, res) {
-        const query = `
-        SELECT prodID, prodName, quantity,
-        amount, Category, prodUrl
-        FROM Products
-        WHERE prodID = ${req.params.id};
-        `
-        db.query(query, (err, result) => {
+    db.query(query, values, (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+};
+const getProductsByCategory = (category, result) => {
+    const query = `
+        SELECT * FROM products
+        WHERE category = ?;
+    `;
+    db.query(query, [category], (err, results) => {
+        if (err) {
+            console.error(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+};
+const getProductById = (id, result) => {
+    db.query("SELECT * FROM products WHERE prodID = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results[0]);
+        }
+    });
+};
+const insertProduct = (data, result) => {
+    db.query("INSERT INTO products (product_name, category_id, price, description, primary_image_url) VALUES (?, ?, ?, ?, ?)",
+        [data.product_name, data.category_id, data.price, data.description, data.primary_image_url],
+        (err, results) => {
             if (err) {
-                throw err
+                console.log(err);
+                result(err, null);
             } else {
-                res.json({ status: res.statusCode, result });
+                result(null, results);
             }
-        })
-    }
-    // Add a product
-    addProduct(req, res) {
-        const data = req.body
-        const query = `
-        INSERT INTO Products
-        SET ?;
-        `
-        db.query(query,[data], (err) => {
-            if(err) {
-                throw err
+        });
+};
+const updateProductById = (data, id, result) => {
+    db.query("UPDATE products SET product_name = ?, category_id = ?, price = ?, description = ?, primary_image_url = ? WHERE product_id = ?",
+        [data.product_name, data.category_id, data.price, data.description, data.primary_image_url, id],
+        (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
             } else {
-                res.json({ status: res.statusCode, msg: "Product added!" })
+                result(null, results);
             }
-        })
-    }
-    // Update and or edit a single product
-    updateProduct(req, res) {
-        const query = `
-        UPDATE Products
-        SET ?
-        WHERE prodID = ?
-        `
-        db.query(query, [req.body, req.params.id], (err) => {
-                if(err) {
-                    throw err
-                } else {
-                    res.json({ status: res.statusCode, msg: "Product updated!" })
-            }
-        })
-    }
-    // Delete a product
-    deleteProduct(req, res) {
-        const query = `
-        DELETE FROM Products
-        WHERE prodID = ${req.params.id};
-        `
-        db.query(query, (err) => {
-            if(err) {
-                throw err
-            } else {
-                res.json({ status: res.statusCode, msg: "Product deleted!" })
-            }
-        })
-    }
-}
-module.exports = Products;
+        });
+};
+const deleteProductById = (id, result) => {
+    db.query("DELETE FROM products WHERE product_id = ?", [id], (err, results) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+};
+module.exports = {
+    getProducts,
+    getProductById,
+    insertProduct,
+    updateProductById,
+    deleteProductById,
+    getProductsByCategory
+};
