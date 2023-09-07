@@ -1,10 +1,17 @@
-const {express, routes} = require('./routes')
-const path = require('path')
-const app = express()
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const ErrorHandling = require('./Middleware/errorHandling')
-const port =+process.env.PORT || 3000
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const {router, verifyAToken} =  require("./routes/routes.js");
+const app = express();
+// use express json
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// use router
+// app.use(Router);
+app.use(router);
+app.listen(5000, () => console.log('Server running at http://localhost:5000'));
 //static
 app.use(express.static('./static'))
 // Middleware - APplication level
