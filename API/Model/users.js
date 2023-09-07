@@ -1,6 +1,6 @@
 const db = require("../config/index"); //this imprt the db con from config
 const { hash, compare, hashSync } = require("bcrypt");
-const { createToken } = require("../Middleware/authenticateUser");
+const { createToken } = require("../Middleware/authentication");
 class Users {
   fetchUsers(req, res) {
     const query = `
