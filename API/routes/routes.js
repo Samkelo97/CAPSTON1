@@ -45,7 +45,7 @@ const {
   deleteProduct,
 } = productController;
 // Product routes
-router.get("/products", product.showProducts);
+router.get("/products", productController.showProducts);
 router.get("/products/:id", showProductById);
 router.post("/products", createProduct);
 router.put("/products/:id", updateProduct);
@@ -56,7 +56,7 @@ const showAllProducts = (req, res) => {
 // Get all products route
 router.get('/products/all', showAllProducts);
 // Get products by category
-router.get('/products/category/:category', product.filterProducts);
+router.get('/products/category/:category', productController.filterProducts);
 // Cart routes
 // router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
 // router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
