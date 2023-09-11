@@ -59,6 +59,28 @@ routes.delete('/products/:id', (req, res) => {
 })
 // Delete a product route
 
+
+// Add a product to the cart
+routes.post('/cart', bodyParser.json(), (req, res) => {
+  products.addItem(req.res)
+});
+
+// Retrieve the cart contents for a user
+routes.get('/cart/:userId', (req, res) => {
+    products.getItem(req.res)
+});
+
+// Update the quantity of a product in the cart
+routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
+    products.updateItem(req.res)
+});
+
+// Remove a product from the cart
+routes.delete('/cart/:cartItemId', (req, res) => {
+    products.deleteItem(req, res)
+});
+
+
 module.exports = {
     express,
     routes,

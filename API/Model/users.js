@@ -115,6 +115,7 @@ class Users{
         `
         db.query(query,
             [req.body, req.params.id],
+            
             (err)=>{
                 if(err) throw err
                 res.json({
