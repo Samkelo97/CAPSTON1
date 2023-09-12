@@ -64,7 +64,7 @@ const db = require("../config/index");
 //     }
 // }
 const insertCartItem = (data, result) => {
-    db.query("INSERT INTO Cart (userId, product_id, quantity) VALUES (?, ?, ?)",
+    db.query("INSERT INTO Cart (userId, prodID, quantity) VALUES (?, ?, ?)",
         [data.userId, data.product_id, data.quantity],
         (err, results) => {
             if (err) {
