@@ -60,7 +60,7 @@ class Users{
       const query = `
       SELECT userID,firstName, lastName,
       gender, userAge, userRole, emailAdd, userPass,
-      profileUrl
+      userProfile
       FROM Users
       WHERE emailAdd = '${emailAdd}';
       `;
