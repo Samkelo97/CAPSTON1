@@ -34,26 +34,34 @@ class Users{
     }
     async register(req, res) {
       const data = req.body;
-      // encrypt password
-      data.userPass = await hash(data.userPass, 4)
-      // Payload
+
+      if (!data.userPass) {
+        return res.json({ status: res.statusCode, msg: "Password is required." });
+      }
+    
+    // Encrypt password
+    data.userPass = await hash(data.userPass, 15);
+      
       const user = {
         emailAdd: data.emailAdd,
-        userPass: data.userPass,
+        userPass: data.userPass
       };
-      // Query
-      const query = `INSERT INTO Users SET ?;`;
-  
+      
+      //query
+      const query = `
+        INSERT INTO Users
+        SET ?; 
+        `
       db.query(query, [data], (err) => {
         if (err) throw err;
+        //create a token
         let token = createToken(user);
         res.json({
           status: res.statusCode,
           msg: "You are now registered.",
-          token,
-        });
-      });
-    }
+        })
+      })
+  }
 
     login(req, res) {
       const { emailAdd, userPass } = req.body;
