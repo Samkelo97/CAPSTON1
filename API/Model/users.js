@@ -57,45 +57,44 @@ class Users{
 
     login(req, res) {
       const { emailAdd, userPass } = req.body;
-      // query
       const query = `
-    SELECT firstName, lastName, userAge,
-    gender, userRole, emailAdd, userPass,
-    userProfile
-    FROM Users
-    WHERE emailAdd = '${emailAdd}';
-    `;
-      db.query(query, [emailAdd], async (err, result) => {
-        if (err) throw err;
-        if (!result?.length) {
-          res.json({
-            status: res.statusCode,
-            msg: "You provided a wrong email.",
-          });
-        } else {
-          await compare(userPass, result[0].userPass, (cErr, cResult) => {
-            if (cErr) throw cErr;
-            // Create a token
-            const token = createToken({
-              emailAdd,
-              userPass,
-            });
-            if (cResult) {
+      SELECT userID,firstName, lastName,
+      gender, userDOB, userRole, emailAdd, userPass,
+      profileUrl
+      FROM Users
+      WHERE emailAdd = '${emailAdd}';
+      `;
+      db.query(query, async (err, result) => {
+          if (err) throw err;
+          if (!result?.length) {
               res.json({
-                msg: "Logged in",
-                token,
-                result: result[0],
+                  status: res.statusCode,
+                  msg: "You provided a wrong email."
               });
-            } else {
-              res.json({
-                status: res.statusCode,
-                msg: "Invalid password or you have not registered",
+          } else {
+              await compare(userPass, result[0].userPass, (cErr, cResult) => {
+                  if (cErr) throw cErr;
+                  // Create a token
+                  const token = createToken({
+                      emailAdd,
+                      userPass
+                  })
+                  if (cResult) {
+                      res.json({
+                          msg: "Logged in",
+                          token,
+                          result: result[0]
+                      });
+                  } else {
+                      res.json({
+                          status: res.statusCode,
+                          msg: "Invalid password or you have not registered"
+                      });
+                  }
               });
-            }
-          });
-        }
+          }
       });
-    }
+  }
     updateUser(req, res){
         const data = req.body
         if (data.userPass){
