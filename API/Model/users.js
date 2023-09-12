@@ -80,7 +80,7 @@ class Users{
                   msg: "You provided a wrong email."
               });
           } else {
-              await compare(userPass, result[0].userPass, (cErr, cResult) => {
+              compare(userPass, result[0].userPass, (cErr, cResult) => {
                   if (cErr) throw cErr;
                   // Create a token
                   const token = createToken({
