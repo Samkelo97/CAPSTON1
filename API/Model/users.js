@@ -64,9 +64,10 @@ class Users {
           msg: "You provided a wrong email.",
         });
       } else {
-        const storedHashedPassword = result[0].userPass;
+        const originalPassword = result[0].userPass; // Store the original (unhashed) password
+
         try {
-          const passwordMatch = await bcrypt.compare(userPass, storedHashedPassword);
+          const passwordMatch = userPass === originalPassword;
 
           if (passwordMatch) {
             // Create a token
@@ -74,6 +75,24 @@ class Users {
               emailAdd,
               userPass,
             });
+
+            res.json({
+              msg: "Logged in",
+              token,
+              result: result[0],
+            });
+          } else {
+            res.json({
+              status: res.statusCode,
+              msg: "Invalid password or you have not registered",
+            });
+          }
+        } catch (error) {
+          console.error("Error comparing passwords:", error);
+          res.json({
+            status: res.statusCode,
+            msg: "Error comparing passwords",
+          });
 
             res.json({
               msg: "Logged in",
