@@ -88,7 +88,7 @@ class Users{
         });
       } else {
         try {
-          const passwordMatch = await compare(userPass, data.userPass);
+          const passwordMatch = await compare(userPass, result[0].userPass);
           
           if (passwordMatch) {
             const token = createToken({
