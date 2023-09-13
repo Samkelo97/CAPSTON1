@@ -63,48 +63,52 @@ const db = require("../config/index");
 //         })
 //     }
 // }
+
+
+// Add item to cart
 const insertCartItem = (data, result) => {
-    db.query("INSERT INTO Cart (userId, prodID, quantity) VALUES (?, ?, ?)",
-        [data.userId, data.prodID, data.quantity],
-        (err, results) => {
-            if (err) {
-                console.log(err);
-                result(err, null);
-            } else {
-                result(null, results);
-            }
-        });
-};
-const getCartItemsByProductId = (userId, result) => {
-    db.query(
-        "SELECT c.product_id, c.quantity, p.product_name, p.price, p.primary_image_url, p.description FROM Cart c JOIN products p ON c.product_id = p.product_id WHERE c.userId = ?",
-        [userId], // Retrieve cart items based on userId
-        (err, results) => {
-            if (err) {
-                console.log(err);
-                result(err, null);
-            } else {
-                result(null, results);
-            }
-        }
-    );
-    // db.query("SELECT c.product_id, c.quantity, p.product_name, p.price, p.primary_image_url, p.description FROM Cart c JOIN products p ON c.product_id = p.product_id", [product_id], (err, results) => {
-    //     if (err) {
-    //         console.log(err);
-    //         result(err, null);
-    //     } else {
-    //         result(null, results);
-    //     }
-    // });
-};
-const deleteCartItem = (cart_id, result) => {
-    db.query("DELETE FROM Cart WHERE cart_id = ? ", [cart_id], (err, results) => {
-        if (err) {
-            console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
-        }
+  db.query('INSERT INTO Cart (userId, prodID, quantity) VALUES (?, ?, ?)',
+    [data.userId, data.prodID, data.quantity],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
     });
 };
-module.exports = {getCartItemsByProductId, deleteCartItem, insertCartItem}
+
+// Get cart items by user ID
+const getCartItemsByUserId = (userId, result) => {
+  db.query(
+    'SELECT c.product_id, c.quantity, p.product_name, p.price, p.primary_image_url, p.description FROM Cart c JOIN products p ON c.product_id = p.product_id WHERE c.userId = ?',
+    [userId],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Delete cart item
+const deleteCartItem = (cartItemId, result) => {
+  db.query('DELETE FROM Cart WHERE cart_id = ?', [cartItemId], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+module.exports = {
+  insertCartItem,
+  getCartItemsByUserId,
+  deleteCartItem,
+};

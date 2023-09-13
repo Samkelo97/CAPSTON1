@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const {verifyAToken} = require('../Middleware/authentication')
+const products = require('../controllers/cartController');
 const routes = express.Router()
 //Import all model's objects
 const {users, products} = require('../Model')
@@ -61,25 +62,27 @@ routes.delete('/products/:id', (req, res) => {
 // Delete a product route
 
 
-// Add a product to the cart
+// Add item to cart
 routes.post('/cart', bodyParser.json(), (req, res) => {
-  products.addItem(req.res)
+  products.addToCart(req, res);
 });
 
 // Retrieve the cart contents for a user
 routes.get('/cart/:userId', (req, res) => {
-    products.getItem(req.res)
+  products.viewCart(req, res);
 });
 
 // Update the quantity of a product in the cart
 routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
-    products.updateItem(req.res)
+  products.updateItem(req, res);
 });
 
 // Remove a product from the cart
 routes.delete('/cart/:cartItemId', (req, res) => {
-    products.deleteItem(req, res)
+  products.removeFromCart(req, res);
 });
+
+module.exports = routes;
 
 
 module.exports = {
