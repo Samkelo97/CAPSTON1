@@ -1,12 +1,11 @@
-
 const db = require('../config')
 const { hash, compare, hashSync } = require('bcrypt');
 const { createToken } = require('../Middleware/authentication');
 class Users{
-    getUsers(req, res) {
+    fetchUsers(req, res) {
         const query = `
         SELECT userID, firstName, lastName, 
-        Gender, userAge, userRole, emailAdd, userProfile
+        Gender, userAge, userRole, emailAdd, profileUrl
         FROM Users;
         `
         db.query(query, (err, results)=>{
@@ -18,10 +17,10 @@ class Users{
         })
     }
 
-    getUser(req, res) {
+    fetchUser(req, res) {
         const query = `
         SELECT userID, firstName, lastName, 
-        Gender, userAge, userRole, emailAdd, userProfile
+        Gender, userAge, userRole, emailAdd, profileUrl
         FROM Users
         WHERE userID = ${req.params.id};
         `
@@ -72,7 +71,7 @@ class Users{
       const query = `
         SELECT userID, firstName, lastName,
         Gender, userAge, userRole, emailAdd,
-        userPass, userProfile
+        userPass, profileUrl
         FROM Users
         WHERE emailAdd = '${emailAdd}';
       `;
