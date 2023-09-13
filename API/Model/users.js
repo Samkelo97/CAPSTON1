@@ -6,7 +6,7 @@ class Users{
     getUsers(req, res) {
         const query = `
         SELECT userID, firstName, lastName, 
-        gender, userAge, userRole, emailAdd, userProfile
+        Gender, userAge, userRole, emailAdd, userProfile
         FROM Users;
         `
         db.query(query, (err, results)=>{
@@ -21,7 +21,7 @@ class Users{
     getUser(req, res) {
         const query = `
         SELECT userID, firstName, lastName, 
-        gender, userAge, userRole, emailAdd, userProfile
+        Gender, userAge, userRole, emailAdd, userProfile
         FROM Users
         WHERE userID = ${req.params.id};
         `
@@ -71,7 +71,7 @@ class Users{
     
       const query = `
         SELECT userID, firstName, lastName,
-        gender, userAge userRole, emailAdd,
+        Gender, userAge, userRole, emailAdd,
         userPass, userProfile
         FROM Users
         WHERE emailAdd = '${emailAdd}';
