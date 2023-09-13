@@ -4,7 +4,7 @@ const {verifyAToken} = require('../Middleware/authentication')
 const products = require('../controllers/cartController');
 const routes = express.Router()
 //Import all model's objects
-const {users, products} = require('../Model')
+const {users} = require('../Model')
 //User's router
 routes.get('/users',
  (req, res)=>{
