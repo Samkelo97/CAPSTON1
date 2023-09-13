@@ -16,6 +16,10 @@ routes.post('/register',bodyParser.json(),
 (req, res)=>{
     users.register(req, res)
 })
+routes.post('/login',
+bodyParser.json(), (req, res)=>{
+    users.login(req, res)
+})
 routes.put('/user/:id', bodyParser.json(),
  (req, res)=>{
     users.updateUser(req,res)
@@ -27,10 +31,7 @@ routes.patch('/user/:id', bodyParser.json(),
 routes.delete('/user/:id', (req, res)=>{
     users.deleteUser(req, res)
 })
-routes.post('/login',
-bodyParser.json(), (req, res)=>{
-    users.login(req, res)
-})
+
 // products
 routes.get('/products', (req, res) => {
     products.getProducts(req, res)
