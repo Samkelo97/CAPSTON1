@@ -102,10 +102,10 @@ class Users{
             });
           } else {
             console.log("Password mismatch for email:", emailAdd);
-            // res.json({
-            //   status: res.statusCode,
-            //   msg: "Invalid password or you have not registered"
-            // });
+            res.json({
+              status: res.statusCode,
+              msg: "Invalid password or you have not registered"
+            });
           }
         } catch (error) {
           console.error("Error comparing passwords:", error);
