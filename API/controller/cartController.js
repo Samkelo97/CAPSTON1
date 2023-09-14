@@ -1,46 +1,62 @@
-const { insertCartItem, getCartItemsByUserId, deleteCartItem } = require('../Model/cartModel');
-
-// Add item to cart
-const addToCart = (req, res) => {
-  const data = req.body;
-  insertCartItem(data, (err, results) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: 'An error occurred while adding the item to the cart.' });
-    } else {
-      res.json(results);
-    }
-  });
-};
-
-// View user's cart
-const viewCart = (req, res) => {
-  const userId = req.params.userId;
-  getCartItemsByUserId(userId, (err, results) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: 'An error occurred while retrieving the cart items.' });
-    } else {
-      res.json(results);
-    }
-  });
-};
-
-// Remove item from cart
-const removeFromCart = (req, res) => {
-  const cartItemId = req.params.cartItemId;
-  deleteCartItem(cartItemId, (err, results) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ error: 'An error occurred while removing the item from the cart.' });
-    } else {
-      res.json(results);
-    }
-  });
-};
-
+const { getCart, getCartById, insertCart, updateCartById, deleteCartById } = require("../models/Cart");
+// Get All in Cart
+const showCart = (req, res) => {
+    getCart(req.params.userID,(err, results) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.json(results);
+        }
+    });
+}
+// Get Single Cart
+const showCartById = (req, res) => {
+    getCartById(req.params.id, (err, results) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.json(results);
+        }
+    });
+}
+// Create New Cart
+const createCart = (req, res) => {
+    const data = req.body;
+    insertCart(data, (err, results) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.json(results);
+        }
+    });
+}
+// Update Cart
+const updateCart = (req, res) => {
+    const data  = req.body;
+    const id    = req.params.id;
+    updateCartById(data, id, (err, results) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.json(results);
+        }
+    });
+}
+// Delete Product
+const deleteCart = (req, res) => {
+    const id = req.params.id;
+    deleteCartById(id, (err, results) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.json(results);
+        }
+    });
+}
 module.exports = {
-  addToCart,
-  viewCart,
-  removeFromCart,
-};
+    showCart,
+    showCartById,
+    createCart,
+    updateCart,
+    deleteCart
+}

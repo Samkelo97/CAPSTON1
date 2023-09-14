@@ -1,62 +1,89 @@
-const { getCart, getCartById, insertCart, updateCartById, deleteCartById } = require("../Model/cartModel");
-// Get All in Cart
-const showCart = (req, res) => {
-    getCart((err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
+const db = require("../config/index");
+// const getCart = (userID, result) => {
+//   db.query(
+//     "SELECT c.cartID, c.quantity, p.prodQUANTITY, p.prodIMG, p.prodNAME, p.prodPRICE, s.userID " +
+//       "FROM Cart c " +
+//       "INNER JOIN Products p ON c.prodID = p.prodID " +
+//       "INNER JOIN Users s ON c.userID = s.userID " +
+//       "WHERE c.userID = ?",
+//     [userID],
+//     (err, results) => {
+//       if (err) {
+//         console.log(err);
+//         result(err, null);
+//         console.log("Error executing SQL query:", err);
+//       } else {
+//         result(null, results);
+//       }
+//     }
+//   );
+// };
+const getCart = (userID, result) => {
+    db.query(
+      "SELECT c.cartID, c.quantity, p.prodQUANTITY, p.prodIMG, p.prodNAME, p.prodPRICE, s.userID " +
+        "FROM Cart c " +
+        "INNER JOIN Products p ON c.prodID = p.prodID " +
+        "INNER JOIN Users s ON c.userID = s.userID " +
+        "WHERE c.userID = ?",
+      [userID],
+      (err, results) => {
+        if (err) {
+          console.log("Error executing SQL query:", err);
+          result(err, null);
+        } else {
+          result(null, results);
         }
-    });
-}
-// Get Single Cart
-const showCartById = (req, res) => {
-    getCartById(req.params.id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
-// Create New Cart
-const createCart = (req, res) => {
-    const data = req.body;
-    insertCart(data, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
-// Update Cart
-const updateCart = (req, res) => {
-    const data  = req.body;
-    const id    = req.params.id;
-    updateCartById(data, id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
-// Delete Product
-const deleteCart = (req, res) => {
-    const id = req.params.id;
-    deleteCartById(id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
+      }
+    );
+  };
+const getCartById = (id, result) => {
+  db.query("SELECT * FROM Cart WHERE cartID = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+const insertCart = (data, result) => {
+  db.query("INSERT INTO Cart SET ?", [data], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+const updateCartById = (data, id, result) => {
+  db.query(
+    "UPDATE Cart SET prodQUANTITY = ?, prodIMG = ? WHERE cartID = ?",
+    [data.prodQUANTITY, data.prodIMG, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+const deleteCartById = (id, result) => {
+  db.query("DELETE FROM Cart WHERE cartID = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
 module.exports = {
-    showCart,
-    showCartById,
-    createCart,
-    updateCart,
-    deleteCart
-}
+  getCart,
+  getCartById,
+  insertCart,
+  updateCartById,
+  deleteCartById,
+};
