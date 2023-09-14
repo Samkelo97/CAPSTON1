@@ -1,10 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const {verifyAToken} = require('../Middleware/authentication')
-const products = require('../controller/cartController');
 const routes = express.Router()
 //Import all model's objects
-const {users} = require('../Model')
+const {users, products} = require('../Model')
 //User's router
 routes.get('/users',
  (req, res)=>{
@@ -17,10 +16,6 @@ routes.post('/register',bodyParser.json(),
 (req, res)=>{
     users.register(req, res)
 })
-routes.post('/login',
-bodyParser.json(), (req, res)=>{
-    users.login(req, res)
-})
 routes.put('/user/:id', bodyParser.json(),
  (req, res)=>{
     users.updateUser(req,res)
@@ -30,9 +25,12 @@ routes.patch('/user/:id', bodyParser.json(),
     users.updateUser(req,res)
 })
 routes.delete('/user/:id', (req, res)=>{
-    users.deleteUser(req, res)
+    users.delete(req, res)
 })
-
+routes.post('/login',
+bodyParser.json(), (req, res)=>{
+    users.login(req, res)
+})
 // products
 routes.get('/products', (req, res) => {
     products.getProducts(req, res)
@@ -62,27 +60,25 @@ routes.delete('/products/:id', (req, res) => {
 // Delete a product route
 
 
-// Add item to cart
+// Add a product to the cart
 routes.post('/cart', bodyParser.json(), (req, res) => {
-  products.addToCart(req, res);
+  products.addItem(req.res)
 });
 
 // Retrieve the cart contents for a user
 routes.get('/cart/:userId', (req, res) => {
-  products.viewCart(req, res);
+    products.getItem(req.res)
 });
 
 // Update the quantity of a product in the cart
 routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
-  products.updateItem(req, res);
+    products.updateItem(req.res)
 });
 
 // Remove a product from the cart
 routes.delete('/cart/:cartItemId', (req, res) => {
-  products.removeFromCart(req, res);
+    products.deleteItem(req, res)
 });
-
-module.exports = routes;
 
 
 module.exports = {
