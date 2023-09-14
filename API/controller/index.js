@@ -79,6 +79,24 @@ routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
 routes.delete('/cart/:cartItemId', (req, res) => {
     products.deleteItem(req, res)
 });
+const {
+    showCart,
+    showCartById,
+    createCart,
+    updateCart,
+    deleteCart,
+  } = cartController;
+  // Get All Cart
+  routes.get("/cart", showCart);
+  // Get Single Cart
+  routes.get("/cart/:id", showCartById);
+  // Create New Cart
+  routes.post("/cart", createCart);
+  // Update Cart
+  routes.patch("/cart/:id", updateCart);
+  // Delete Cart
+  routes.delete("/cart/:id", deleteCart);
+
 
 
 module.exports = {
