@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const {verifyAToken} = require('../Middleware/authentication')
-const products = require('../controller/cartController');
 const routes = express.Router()
 //Import all model's objects
 const {users} = require('../Model')
