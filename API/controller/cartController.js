@@ -1,4 +1,4 @@
-const { getCart, getCartById, insertCart, updateCartById, deleteCartById } = require("../models/Cart");
+const { getCart, getCartById, insertCart, updateCartById, deleteCartById } = require("../Model/cartModel");
 // Get All in Cart
 const showCart = (req, res) => {
     getCart(req.params.userID,(err, results) => {
