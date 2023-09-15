@@ -27,33 +27,33 @@
         currentIndex: 0,
         cards: [
           {
-            title: 'Card 1',
-            description: 'ggggggggggggg',
+            title: 'Inam Nkabi',
+            description: '03-07-2023',
             image: 'https://i.postimg.cc/m2yC5cXK/C12_C1_Inam_Nkabi_(3).jpg',
           },
           {
-            title: 'Card 2',
-            description: 'ggggggggg',
+            title: 'Ethan Oliver',
+            description: '08-08-2023',
             image: 'https://i.postimg.cc/x1VpKbk7/Ethan_(1).jpg',
           },
           {
-            title: 'Card 3',
-            description: 'ggggg',
+            title: 'Sidwell Batyi',
+            description: '09-06-2023',
             image: 'https://i.postimg.cc/wMJZp5yX/image.png',
           },
           {
-            title: 'Card 3',
-            description: 'This is the third card',
+            title: 'Lisa Mbuwa',
+            description: '11-06-2023',
             image: 'https://i.postimg.cc/52977W3q/Lisa.jpg',
           },
           {
-            title: 'Card 3',
-            description: 'This is the third card',
+            title: 'Sakhe Mzolisa',
+            description: '15-09-2023',
             image: 'https://i.postimg.cc/JhkbKp95/Sakhe.jpg',
           },
           {
-            title: 'Card 3',
-            description: 'This is the third card',
+            title: 'Okuhle Gxotiwe',
+            description: '10-09-2023',
             image: 'https://i.postimg.cc/WzkJmVx0/C12_Okuhle_Gwotiwe_(1).jpg',
           },
          
