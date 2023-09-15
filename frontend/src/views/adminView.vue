@@ -10,33 +10,37 @@
         <input v-model="newProduct.prodUrl" placeholder="Product URL" />
         <button @click="addProduct" onclick="window.location.reload()">Add Product</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Product ID</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Product URL</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in products" :key="product.prodID">
-            <td>{{ product.prodID }}</td>
-            <td>{{ product.prodName }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.amount }}</td>
-            <td>{{ product.Category }}</td>
-            <td><img :src="product.prodUrl" alt=""></td>
-            <td>
-              <button @click="editProduct(product)">Edit</button>
-              <button @click="deleteProduct(product.prodID)" onclick="window.location.reload()">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Product URL</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Table data -->
+      <tr v-for="product in products" :key="product.prodID">
+        <td>{{ product.prodID }}</td>
+        <td>{{ product.prodName }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.amount }}</td>
+        <td>{{ product.Category }}</td>
+        <td><img :src="product.prodUrl" alt=""></td>
+        <td>
+          <button @click="editProduct(product)">Edit</button>
+          <button @click="deleteProduct(product.prodID)" onclick="window.location.reload()">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
     </div>
   </template>
   
@@ -44,9 +48,11 @@
 
   import axios from "axios";
   import AddProductComp from "@/components/AddProductComp.vue";
+  import spinner from "@/components/spinner.vue"
   export default {
     name: "AdminTable",
     components: { AddProductComp },
+    components:{spinner},
     data() {
       return {
         newUser: {
@@ -200,6 +206,26 @@
   </script>
   
   <style scoped>
+
+/* Responsive styles for the table */
+@media screen and (max-width: 399px) {
+  .table {
+    font-size: 14px; /* Reduce font size for smaller screens */
+    /* Add other styles to make the table smaller */
+  }
+
+  /* Adjust cell padding for smaller screens */
+  .table td,
+  .table th {
+    padding: 8px; /* Adjust padding as needed */
+  }
+
+  /* Make the table scroll horizontally on smaller screens */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
+
   .admin {
     background-image: url('https://i.postimg.cc/g2nbvTYz/dark-storage-with-shelves-many-forms-creating-different-shoes-boots.jpg');
     background-repeat: no-repeat;

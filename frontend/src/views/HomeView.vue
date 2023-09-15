@@ -7,12 +7,11 @@
     <div>
   <div class="container">
     <ul>
-      
-      <li><router-link to="./FinancialView.vue" title="Expert financial Advice"><i class="fa fa-btc" aria-hidden="true"></i></router-link></li>
-      <li><a href="#" title="Vehicle Services NationWide"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
-      <li><a href="#" title="Checkout our Show Room"><i class="fa-solid fa-car" aria-hidden="true"></i></a></li>
-      
-    </ul>
+  <li><router-link to="./FinancialView.vue" title="Expert financial Advice"><i class="fa fa-btc" aria-hidden="true"></i></router-link></li>
+  <li><a href="#" title="Vehicle Services NationWide"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+  <li><a href="#" title="Checkout our Show Room"><i class="fa-solid fa-car" aria-hidden="true"></i></a></li>
+</ul>
+
   </div>
 </div>
    
@@ -95,7 +94,7 @@ export default {
   background-size: inherit;
   height: 100vh;
   background-repeat: no-repeat;
-  width: 100vw;
+  width: 100%;
   background-size:cover;
 font-family: 'Sedgwick Ave Display', cursive;
 font-weight: bolder;
@@ -103,6 +102,7 @@ color: white;
 overflow-x: hidden;
 background-color: grey;
 background-attachment: fixed;
+overflow-x: hidden;
 }
 .yellow{
   color: gold;
@@ -156,18 +156,18 @@ body {
 }
 
 ul {
-  margin:0;
-  padding:0;
-  display:flex;
-  position: absolute;
-  top: 59%;
-  left:50%;
-  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  height: 100%; /* Occupy full height of parent */
 }
 
 ul li {
-  list-style:none;
+  list-style: none;
   margin: 0 15px;
+  text-align: center; /* Center text within list items */
 }
 
 ul li a {
@@ -211,7 +211,9 @@ ul li a:hover {
 }
 .cars{
   height:700px;
+  width: 100%;
   background-color: black;
+  margin: auto;
 }
 .customers{
   height: 500px;

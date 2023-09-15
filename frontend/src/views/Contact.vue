@@ -1,9 +1,9 @@
 <template>
-    
-<div class="form-main">
+  <div class="form-main">
     <div class="main-wrapper">
-      <h2 class="form-head">Contact From</h2>
-      <form class="form-wrapper">
+      <h2 class="form-head">Contact Form</h2>
+      <!-- <form class="form-wrapper"> -->
+        <form action="https://formspree.io/f/xdordgpj" method="POST" class="form-wrapper">  
         <div class="form-card">
           <input
             class="form-input"
@@ -50,15 +50,62 @@
           >
         </div>
         <div class="btn-wrap">
-          <button> Submit </button>
+          <button type="submit"> Submit </button>
         </div>
       </form>
     </div>
   </div>
+<!-- </form>  -->
 </template>
-<style scoped>
+<script>
+export default {
+  data() {
+    return {
+      formData: {
+        full_name: "",
+        email: "",
+        phone_number: ""
+      },
+      errors: {}
+    };
+  },
+  methods: {
+    submitForm() {
+      // Reset errors
+      this.errors = {};
+
+      // Perform validation
+      if (!this.formData.full_name) {
+        this.errors.full_name = "Full Name is required.";
+      }
+
+      if (!this.formData.email) {
+        this.errors.email = "Email is required.";
+      } else if (!this.isValidEmail(this.formData.email)) {
+        this.errors.email = "Invalid email address.";
+      }
+
+      if (!this.formData.phone_number) {
+        this.errors.phone_number = "Phone Number is required.";
+      }
+
+      // If there are no errors, you can submit the form data
+      if (Object.keys(this.errors).length === 0) {
+        // Send the form data to your backend or perform the desired action
+        console.log("Form submitted:", this.formData);
+      }
+    },
+    isValidEmail(email) {
+      // Basic email validation, you can replace with a more complex regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+  }
+};
+</script>
+<style  scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap");
-$color-gray: #515151;
+color-gray: #515151;
 $color-black: #000;
 
 body {
@@ -66,6 +113,10 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+}
+h2{
+  color: maroon;
+  font-family: 'Black Ops One', cursive;
 }
 
 .form-main {
@@ -119,10 +170,10 @@ body {
           line-height: 30px;
           font-weight: 400;
               box-sizing: border-box;
-
-        :valid,
-          :focus {
-            border: 1px solid $color-gray;
+        
+         :focus {
+            border: 1px solid ;
+            color:gray;
           }
 
           :valid ~ .form-label,
@@ -162,7 +213,7 @@ body {
         .form-textarea {
           padding: 20px 25px 15px;
           width: 100%;
-          border: 1px solid $color-black;
+          border: 1px solid gold;
           border-radius: 5px;
           background: transparent;
           outline: none;
@@ -230,8 +281,9 @@ padding: 16px 0 0;
   cursor: pointer; box-shadow: 0 0 5px 5px #00000020;
 }
 .btn-wrap button:hover {
-  border: 1px solid #000;
+  border: 1px solid gold;
   background: transparent;
+  color:(maroon);
   
 }
 

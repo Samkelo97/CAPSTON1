@@ -92,7 +92,6 @@ import axios from 'axios';
           }
       },
       resetProductForm() {
-          // Reset the product form after successful add/update
           this.productForm.prodID = "";
           this.productForm.prodName = "";
           this.productForm.amount = "";
@@ -101,7 +100,7 @@ import axios from 'axios';
           this.productForm.Category = "";
       },
       editProduct(product) {
-          // Populate the product form with product data for editing
+      
           this.productForm.prodID = product.prodID;
           this.productForm.prodName = product.prodName;
           this.productForm.amount = product.amount;
@@ -174,7 +173,6 @@ button:hover {
   border: 1px solid #ddd;
 }
 
-/* Style for product images */
 .product-table img {
   max-width: 100px;
   height: auto;

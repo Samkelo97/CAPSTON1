@@ -5,14 +5,15 @@
         </div>
     
         <div v-else>
-            Processing...
+           <spinner/>
         </div>      
     </div>
 </template>
 <script>
 import ProductsComp from '@/components/ProductsComp.vue';
+import spinner from '@/components/spinner.vue';
 export default {
-    components: { ProductsComp },
+    components: { ProductsComp ,spinner},
 
     computed: {
         products() {

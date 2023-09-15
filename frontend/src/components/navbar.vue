@@ -15,13 +15,10 @@
               <router-link class="nav-link" to="/Products">Showroom</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Service Center</a>
+              <a class="nav-link" href="/About">About Us</a>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/Contact">Contact Us</router-link>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Forum</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/admin">Admin</a>
@@ -30,13 +27,29 @@
               <a class="nav-link" href="/cart">cart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">login</a>
+              <router-link class="login-button mx-3" v-if="!isLoggedIn" to="/login">Login</router-link>
+              <button v-else @click="logout">Logout</button>
+             <router-link :to="{ name: 'register' }" class="join-button" v-if="!isLoggedIn">Sign Up</router-link>
             </li>
           </ul>
+          
         </div>
       </div>
     </nav>
     </template>
+    <script>
+    export default{
+    methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      localStorage.removeItem("userData");
+      this.$router.push("/");
+      window.location.reload();
+    },
+  },
+} 
+    
+    </script>
     
     <style scoped>
     #nav{

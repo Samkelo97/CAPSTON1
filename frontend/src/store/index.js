@@ -176,10 +176,10 @@ export default createStore({
         });
       }
     },
-    logout({ commit }) {
-      localStorage.removeItem("userToken");
+    logout() {
+      this.$store.dispatch("logout");
       localStorage.removeItem("userData");
-      commit("clearUser");
+      this.$router.push("/");
       window.location.reload();
     },
 

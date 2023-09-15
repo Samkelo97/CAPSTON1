@@ -26,8 +26,6 @@ export default {
   },
   methods: {
     getCartItems() {
-      // Make a GET request to retrieve the cart items from the server
-      // Replace 'YOUR_SERVER_URL' with the actual URL of your server
       axios.get('https://capston1.onrender.com/cart/')
         .then(response => {
           this.cartItems = response.data;
@@ -38,4 +36,5 @@ export default {
     }
   }
 };
-</script>
+</script> 
+
