@@ -4,9 +4,10 @@ const {verifyAToken} = require('../Middleware/authentication')
 const routes = express.Router()
 //Import all model's objects
 const {users, products} = require('../Model')
+const CartController = require('./cartController')
 //User's router
 routes.get('/users',
- (req, res)=>{
+(req, res)=>{
     users.fetchUsers(req, res)
 })
 routes.get('/users/:id', (req, res)=>{
@@ -17,11 +18,11 @@ routes.post('/register',bodyParser.json(),
     users.register(req, res)
 })
 routes.put('/user/:id', bodyParser.json(),
- (req, res)=>{
+(req, res)=>{
     users.updateUser(req,res)
 })
 routes.patch('/user/:id', bodyParser.json(),
- (req, res)=>{
+(req, res)=>{
     users.updateUser(req,res)
 })
 routes.delete('/user/:id', (req, res)=>{
@@ -47,11 +48,11 @@ routes.post('/add-products', bodyParser.json(), (req, res) => {
 // Update a single route route
 routes.patch('/products/:id', bodyParser.json(), (req, res) => {
     products.updateProduct(req, res)
-
-routes.put('/products/:id', bodyParser.json(), (req, res) => {
-    products.updateProduct(req, res)
-})
-
+    
+    routes.put('/products/:id', bodyParser.json(), (req, res) => {
+        products.updateProduct(req, res)
+    })
+    
 })
 // Delete a product route
 routes.delete('/products/:id', (req, res) => {
@@ -59,26 +60,65 @@ routes.delete('/products/:id', (req, res) => {
 })
 // Delete a product route
 
+// const {getCartItemsByUserId} = require('../Model/cartModel')
 
 // Add a product to the cart
-routes.post('/cart', bodyParser.json(), (req, res) => {
-  products.addItem(req.res)
-});
+// routes.post('/cart/:userID', bodyParser.json(), (req, res) => {
+//   products.addItem(req.res)
+// });
 
+const {
+    showCart,
+    showCartById,
+    createCart,
+    updateCart,
+    deleteCart,
+    insertCart
+    
+  } = CartController;
+  // Get All Cart
+  routes.get("/cart/:userID", showCart);
+  
+  // Get Single Cart
+  routes.get("/cart/:id", showCartById);
+  
+  // Create New Cart
+  routes.post("/cart", createCart);
+  
+  // Update Cart
+  routes.patch("/cart/:id", updateCart);
+  
+  // Delete Cart
+  routes.delete("/cart/:id", deleteCart);
+
+
+  //
+  
+  
+  
+  
+  
+  
+  
+  
+  
 // Retrieve the cart contents for a user
-routes.get('/cart/:userId', (req, res) => {
-    products.getItem(req.res)
-});
+// routes.get('/cart/:userID', (req, res) => {
+//     products.getItem(req.res)
+// });
+// routes.get('/cart/:userID', (req, res) => {
+//     getCartItemsByUserId.showCart(req.res)
+// });
 
 // Update the quantity of a product in the cart
-routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
-    products.updateItem(req.res)
-});
+// routes.put('/cart/:cartItemId', bodyParser.json(), (req, res) => {
+//     products.updateItem(req.res)
+// });
 
 // Remove a product from the cart
-routes.delete('/cart/:cartItemId', (req, res) => {
-    products.deleteItem(req, res)
-});
+// routes.delete('/cart/:cartItemId', (req, res) => {
+//     products.deleteItem(req, res)
+// });
 
 
 module.exports = {
