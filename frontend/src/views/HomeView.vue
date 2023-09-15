@@ -7,9 +7,9 @@
     <div>
   <div class="container">
     <ul>
-  <li><router-link to="./FinancialView.vue" title="Expert financial Advice"><i class="fa fa-btc" aria-hidden="true"></i></router-link></li>
-  <li><a href="#" title="Vehicle Services NationWide"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
-  <li><a href="#" title="Checkout our Show Room"><i class="fa-solid fa-car" aria-hidden="true"></i></a></li>
+  <li><router-link to="https://www.facebook.com/" title="facebook"><i class="fa fa-btc" aria-hidden="true"></i></router-link></li>
+  <li><router-link to="/login" title="login"><i class="fa fa-globe" aria-hidden="true"></i></router-link></li>
+  <li><router-link to="https://www.linkedin.com/feed/" title="linkedIn"><i class="fa-solid fa-car" aria-hidden="true"></i></router-link></li>
 </ul>
 
   </div>

@@ -27,7 +27,7 @@
           <input type="text" id="gender" v-model="form.Gender" class="input" />
         </div>
         <div class="form-group">
-          <label for="userDOB">Date of Birth:</label>
+          <label for="userDOB">Age:</label>
           <input type="number" id="userDOB" v-model="form.userAge" class="input" />
         </div>
         <div class="form-group">
