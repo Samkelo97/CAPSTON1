@@ -89,13 +89,11 @@
           userPass: "",
           userProfile: "",
         },
-        registrationError: null,
       };
     },
     methods: {
       async registerUser() {
         this.registrationError ='error';
-        console.log(this.registrationError);
         try {
           const response = await this.$store.dispatch("registerUser", this.form);
           console.log(response);

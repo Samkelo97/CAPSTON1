@@ -26,11 +26,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/cart">cart</a>
             </li>
-            <li class="nav-item">
-              <router-link class="login-button mx-3" v-if="!isLoggedIn" to="/login">Login</router-link>
-              <button v-else @click="logout">Logout</button>
-             <router-link :to="{ name: 'register' }" class="join-button" v-if="!isLoggedIn">Sign Up</router-link>
-            </li>
           </ul>
           
         </div>

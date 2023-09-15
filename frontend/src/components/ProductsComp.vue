@@ -1,27 +1,34 @@
 <template>
     <div>
-        <h2>Products</h2>
-            <div class="prod">
-
-            </div>
+      <h2>Products</h2>
+      <!-- Add a container div with overflow: hidden -->
+      <div class="content-container">
         <!-- PRODUCTS -->
         <div class="row">
-         <!-- PRODUCTS -->
-            <div class="col-4" v-for="product in products" :key="product.prodID">
-                <div class="card" style="width: 18rem; margin:20px; margin-left: 40px;" >
-                    <img :src="product.prodUrl" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.prodName }}</h5>
-                        <p class="card-text">{{ product.Category }}</p>
-                        <h6>R{{product.amount}}</h6>
-                        <router-link class="btn" :to="{ name: 'singleProduct', params: {prodID: product.prodID} }"> More Details </router-link>
-                        <!-- <a href="./SingleProductView.vue" >More Details</a> -->
-                    </div>
-                </div>
+          <!-- PRODUCTS -->
+          <div class="col-lg-4 col-md-4 col-12" v-for="product in products" :key="product.prodID">
+            <div class="card" style="width: 18rem; margin:20px; margin-left: 40px;">
+              <img :src="product.prodUrl" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ product.prodName }}</h5>
+                <p class="card-text">{{ product.Category }}</p>
+                <h6>R{{ product.amount }}</h6>
+                <router-link class="btn" :to="{ name: 'singleProduct', params: { prodID: product.prodID } }"> More Details </router-link>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+  <style>
+  /* Add CSS for the content container with overflow: hidden */
+  .content-container {
+    overflow: hidden;
+  }
+  </style>
+  
 
 <script>
 

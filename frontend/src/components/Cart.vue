@@ -5,7 +5,7 @@
         <tr>
           <th>Cart ID</th>
           <th>Product Name</th>
-          <th>Price</th>
+          <th>amount</th>
           <th>Quantity</th>
           <th>Total</th>
           <th>Action</th>
@@ -77,7 +77,7 @@ export default {
     removeItem(cartID) {
       // Make a DELETE request to remove a cart item
       // Replace 'YOUR_SERVER_URL' with the actual URL of your server
-      axios.delete('YOUR_SERVER_URL/cart/' + cartID)
+      axios.delete('https://capston1.onrender.com/cart/' + cartID)
         .then(response => {
           // Item removed successfully
           this.getCartItems(); // Refresh cart items after removal

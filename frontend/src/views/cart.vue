@@ -1,40 +1,49 @@
 <template>
   <div>
+    <h2>Your Cart</h2>
     <div v-if="cartItems.length > 0" class="row p-4 justify-content-evenly">
-      <Cart />
+      <div v-for="item in cartItems" :key="item.cartID" class="cart-card">
+        <div class="product-details">
+          <img :src="item.prodUrl" alt="Product Image" class="product-image" />
+          <div class="product-info">
+            <h3>{{ item.prodName }}</h3>
+            <p>Quantity: {{ item.quantity }}</p>
+            <!-- Add more product details as needed -->
+          </div>
+        </div>
+      </div>
     </div>
-    <div v-else>Cart is empty.</div>
+    <div v-else>Your cart is empty.</div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
-import Cart from "@/components/Cart.vue";
-
 export default {
-  components: {
-    Cart
+  computed: {
+    cartItems() {
+      // Retrieve cart items from local storage
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    },
   },
-  data() {
-    return {
-      cartItems: []
-    };
-  },
-  mounted() {
-    this.getCartItems();
-  },
-  methods: {
-    getCartItems() {
-      axios.get('https://capston1.onrender.com/cart/')
-        .then(response => {
-          this.cartItems = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
-  }
 };
-</script> 
+</script>
 
+<style scoped>
+.product-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 100px; /* Adjust image width as needed */
+  height: auto;
+  margin-right: 20px; /* Add spacing between image and info */
+}
+
+.product-info {
+  flex: 1;
+}
+
+/* Add more styling as needed */
+</style>
